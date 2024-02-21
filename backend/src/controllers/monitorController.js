@@ -18,10 +18,8 @@ async function monitor(req, res) {
             { url: 'http://172.15.125.16/general.xml', location: 'Nong_Khai' },
             { url: 'http://172.15.124.16/general.xml', location: 'Mukdahan' },
             { url: 'http://172.15.111.16/general.xml', location: 'Harbormall' },
-
             { url: 'http://172.17.26.20/general.xml', location: 'HYI3_FL1' },
             { url: 'http://172.17.26.21/general.xml', location: 'HYI3_FL2' },
-
             { url: 'http://172.15.113.16/general.xml', location: 'Vibhavadi' },
             { url: 'http://172.15.114.16/general.xml', location: 'Ramkhamhaeng' },
             { url: 'http://172.15.115.16/general.xml', location: 'BaanMueangMai' },
@@ -33,13 +31,41 @@ async function monitor(req, res) {
             { url: 'http://172.15.121.16/general.xml', location: 'Si_Yan' },
             { url: 'http://172.15.122.16/general.xml', location: 'Surawong' },
             { url: 'http://172.15.123.16/general.xml', location: 'Rojana' },
-
             { url: 'http://172.17.26.55/general.xml', location: 'HYI4' },
-
             { url: 'http://172.15.127.16/general.xml', location: 'Pongnamron' },
+            { url: 'http://172.15.130.16/general.xml', location: 'Samutsakorn' },
+            { url: 'http://172.15.133.16/general.xml', location: 'Jastel6F' },
+            { url: 'http://172.15.134.16/general.xml', location: 'Jastel7F' },
+            { url: 'http://172.15.129.16/general.xml', location: 'Kingkeaw' },
+            { url: 'http://172.15.128.16/general.xml', location: 'Bangplee' },
+            { url: 'http://172.15.131.16/general.xml', location: 'NikhomPhatthana' },
+            { url: 'http://172.15.132.16/general.xml', location: 'Sattahip' },
+            { url: 'http://172.15.135.16/general.xml', location: 'Maesod' },
+            { url: 'http://172.15.136.16/general.xml', location: 'Measai' },
+            { url: 'http://172.15.137.16/general.xml', location: 'Chiang Khong' },
+            { url: 'http://172.15.138.16/general.xml', location: 'Bang Khae' },
+            { url: 'http://172.15.139.16/general.xml', location: 'Bang Yai' },
+            { url: 'http://172.15.140.16/general.xml', location: 'Sathupradit' },
+            { url: 'http://172.15.141.16/general.xml', location: 'Phra Khanong' },
+            { url: 'http://172.15.157.16/general.xml', location: 'Bankhai' },
+            { url: 'http://172.15.150.16/general.xml', location: 'TFD1' },
+            { url: 'http://172.15.151.16/general.xml', location: 'TFD2' },
+            { url: 'http://172.15.142.16/general.xml', location: 'Kratumban' },
+            { url: 'http://172.15.146.16/general.xml', location: 'Smaedum' },
+            { url: 'http://172.15.143.16/general.xml', location: 'Bangkadee' },
+            { url: 'http://172.15.152.16/general.xml', location: 'Poochao' },
+            { url: 'http://172.15.153.16/general.xml', location: 'Suksawad' },
+            { url: 'http://172.15.156.16/general.xml', location: 'Bangbor' },
+            { url: 'http://172.15.144.16/general.xml', location: 'ESIE2' },
+            { url: 'http://172.15.162.16/general.xml', location: 'Wangnoi' },
+            { url: 'http://172.15.163.16/general.xml', location: 'Khaokhansong' },
+            { url: 'http://172.15.164.16/general.xml', location: 'Pattaya1' },
+            { url: 'http://172.15.165.16/general.xml', location: 'Pattaya2' },
+            { url: 'http://172.15.166.16/general.xml', location: 'Rangsit' },
+            { url: 'http://172.15.167.16/general.xml', location: 'Ratburana' },
 
-
-
+            // { url: 'http://172.15.149.16/general.xml', location: '4002-MDB-BLDG1' },
+            // { url: 'http://172.15.149.17/general.xml', location: '4002-EQP-BLDG2' },
 
 
         ];
@@ -75,7 +101,6 @@ async function monitor(req, res) {
             fetchAndProcessData(urls[25].url, data, urls[25].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[26].url, data, urls[26].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[27].url, data, urls[27].location, ["smoke_power", "smoke_eqp", "smoke_patching", "Ac_sensor"], ["Motion1", "Motion2", "Gen1","Humidity_Power", "Temp_EQP","Humidity_EQP","Temp_Power",]),
-      
             fetchAndProcessData(urls[28].url, data, urls[28].location, ["Door", "AC", "smoke1", "Gen1"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[29].url, data, urls[29].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[30].url, data, urls[30].location, ["Door", "AC", "smoke1", "smoke2"], ["Temperature", "Humidity"]),
@@ -83,40 +108,16 @@ async function monitor(req, res) {
             fetchAndProcessData(urls[32].url, data, urls[32].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[33].url, data, urls[33].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[34].url, data, urls[34].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
-            fetchAndProcessData(urls[35].url, data, urls[35].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
-          
-            fetchAndProcessData(urls[36].url, data, urls[36].location, ["Door", "AC", "smoke1", "Gen1"], ["Rectifier1", "Rectifier2", "Temperature",  "Humidity" ]),
-
-            fetchAndProcessData(urls[37].url, data, urls[37].location, ["Door", "AC", "Smoke", "Gen"], ["Temperature", "Humidity"]),
+            fetchAndProcessData(urls[35].url, data, urls[35].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),       
+             fetchAndProcessData(urls[37].url, data, urls[37].location, ["Door", "AC", "Smoke", "Gen"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[38].url, data, urls[38].location, ["Door", "AC", "Smoke", "Gen"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[39].url, data, urls[39].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[40].url, data, urls[40].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[41].url, data, urls[41].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[42].url, data, urls[42].location, ["Door", "AC", "smoke1", "Rectifier"], ["Temperature", "Humidity"]),
-
-            fetchAndProcessData(urls[43].url, data, urls[43].location, ["Door", "AC", "Smoke"], ["Recti11", "Recti12", "Recti21", "Recti22", "Temperature",  "Humidity"]),
-            fetchAndProcessData(urls[44].url, data, urls[44].location, ["AC", "AC1", "AC2", "AC3", "AC4", "AC5", "AC6","SmokeGen400","SmokeGen100","SmokeMDB","Generator400"]),
-
-            fetchAndProcessData(urls[45].url, data, urls[45].location, [
-                "SmokeMMR",
-                "SmokeElectricalEQP1",
-                "SmokeEQP1", 
-                "Recti1AC",
-                "Recti1Fail",
-                "Recti1DisCharge",
-                "Recti1HighTemp",
-                "Recti2AC",
-                "Recti2Fail",
-                "Recti2DisCharge",
-                "Recti2HighTemp"
-            ], [
-                "TempEQP1",
-                "TempElectricalEQP1",
-                "TempMMR",
-                "HumEQP1",
-                "HumElectricalEQP1", 
-                ]),
-
+            fetchAndProcessData(urls[43].url, data, urls[43].location, ["Door", "AC", "Smoke"], ["Recti11", "Recti12", "Recti21", "Recti22", "Temperature",  "Humidity"], ["Temperature", "Humidity"]),
+            fetchAndProcessData(urls[44].url, data, urls[44].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
+            fetchAndProcessData(urls[45].url, data, urls[45].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[46].url, data, urls[46].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[47].url, data, urls[47].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[48].url, data, urls[48].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
@@ -130,12 +131,29 @@ async function monitor(req, res) {
             fetchAndProcessData(urls[56].url, data, urls[56].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[57].url, data, urls[57].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
             fetchAndProcessData(urls[58].url, data, urls[58].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
-            fetchAndProcessData(urls[59].url, data, urls[59].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
-            fetchAndProcessData(urls[60].url, data, urls[60].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
-            fetchAndProcessData(urls[61].url, data, urls[61].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
-            fetchAndProcessData(urls[62].url, data, urls[62].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
+            // fetchAndProcessData(urls[61].url, data, urls[61].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
+            // fetchAndProcessData(urls[62].url, data, urls[62].location, ["Door", "AC", "Smoke", "Rectifier"], ["Temperature", "Humidity"]),
 
-
+            // fetchAndProcessData(urls[44].url, data, urls[44].location, ["AC", "AC1", "AC2", "AC3", "AC4", "AC5", "AC6","SmokeGen400","SmokeGen100","SmokeMDB","Generator400"], ["Temperature", "Humidity"]),
+            // fetchAndProcessData(urls[45].url, data, urls[45].location, [
+            //     "SmokeMMR",
+            //     "SmokeElectricalEQP1",
+            //     "SmokeEQP1", 
+            //     "Recti1AC",
+            //     "Recti1Fail",
+            //     "Recti1DisCharge",
+            //     "Recti1HighTemp",
+            //     "Recti2AC",
+            //     "Recti2Fail",
+            //     "Recti2DisCharge",
+            //     "Recti2HighTemp"
+            // ], [
+            //     "TempEQP1",
+            //     "TempElectricalEQP1",
+            //     "TempMMR",
+            //     "HumEQP1",
+            //     "HumElectricalEQP1", 
+            //     ]),
 
 
 

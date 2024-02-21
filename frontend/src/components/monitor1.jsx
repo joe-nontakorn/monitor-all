@@ -1,4 +1,4 @@
-function test() {
+function monitor1() {
     return (
       <div>
           <h1>test</h1>
@@ -6,5 +6,5 @@ function test() {
     )
   }
   
-  export default test
+  export default monitor1
   

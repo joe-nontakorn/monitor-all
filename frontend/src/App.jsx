@@ -1,10 +1,10 @@
-import Test from './components/test'; // Changed import statement to use uppercase 'Test'
+import Monitor1 from './components/monitor1'; // Changed import statement to use uppercase 'Test'
 
 
 function App() {
   return (
     <div className='App'>
-      <Test /> 
+      <Monitor1 /> 
     </div>
   );
 }
