@@ -59,7 +59,7 @@ app.use((req, res, next) => {
     }
 });
 
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.use(cors());
 
@@ -69,10 +69,10 @@ appRoutes.routes({ app: app });
 const server = http.createServer(app);
 
 // Pass HTTP server to WebSocket server
-const wss = new WebSocket.Server({ server });
+// const wss = new WebSocket.Server({ server });
 
 // Call WebSocket service function
-webSocketService(wss);
+// webSocketService(wss);
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/build'));
