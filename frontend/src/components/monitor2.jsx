@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../assets/monitor1.css";
-import JastelLogo from "../assets/jastel.jpg";
 
 function App() {
   const [sensorData, setSensorData] = useState([]);
@@ -11,7 +10,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4001/api/v1/monitor")
+      .get("http://localhost:4001/api/v1/monitor2")
       .then((response) => {
         setSensorData(response.data.data);
       })
@@ -45,14 +44,18 @@ function App() {
     "smoke2",
     "Humidity",
     "Temperature",
-    "Motion1",
     "Rectifier",
+    "Recti11",
+    "Recti12",
+    "Recti21",
+    "Recti22",
+    "Gen1",
+
   ];
 
   return (
     <div className="monitor1">
       <div>
-        <img src={JastelLogo} alt="Jastel Logo" />
       </div>
       <table className="sensor-table1">
         <thead className="thead-table1">
@@ -82,9 +85,6 @@ function App() {
           ))}
         </tbody>
       </table>
-
-
-      
     </div>
   );
 }
