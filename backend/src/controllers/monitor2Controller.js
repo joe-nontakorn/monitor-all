@@ -121,30 +121,85 @@ function extractEntries(data, type, filters) {
   let smokeSum = 0;
 
   const otherEntries = filteredEntries
-    .map((entry) => {
-      if (entry["Name"][0] === "Door") {
-        if (entry["Value"][0] === "1") {
-          entry["Value"][0] = "Close";
-        } else if (entry["Value"][0] === "0") {
-          entry["Value"][0] = "Open";
-        }
-      } else if (
-        entry["Name"][0] === "Smoke" ||
-        entry["Name"][0] === "smoke" ||
-        entry["Name"][0] === "smoke1"
-      ) {
-        smokeSum += parseInt(entry["Value"][0]);
-        return null; // Skip adding Smoke and smoke1 entries for now
+  .map((entry) => {
+    if (entry["Name"][0] === "Door") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Close";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Open";
       }
-      return { Name: entry["Name"][0], Value: entry["Value"][0] };
-    })
-    .filter((entry) => entry !== null); // Remove skipped Smoke and smoke1 entries
+    } else if (entry["Name"][0] === "AC") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Normal";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Lost!";
+      }
+    } else if (entry["Name"][0] === "Motion1") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Normal";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Lost!";
+      }
+    } else if (entry["Name"][0] === "Rectifier") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Lost!";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Normal";
+      }
+    } else if (entry["Name"][0] === "Recti11") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Normal";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Lost!";
+      }
+    } else if (entry["Name"][0] === "Recti12") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Normal";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Lost!";
+      }
+    } else if (entry["Name"][0] === "Recti21") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Normal";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Lost!";
+      }
+    } else if (entry["Name"][0] === "Recti22") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Normal";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Lost!";
+      }
+    } else if (entry["Name"][0] === "Gen1") {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Lost!";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Normal";
+      }
+    } else if (entry["Name"][0] === "smoke1" || entry["Name"][0] === "Smoke" || entry["Name"][0] === "smoke2" ) {
+      if (entry["Value"][0] === "1") {
+        entry["Value"][0] = "Normal";
+      } else if (entry["Value"][0] === "0") {
+        entry["Value"][0] = "Lost!";
+      }
+    } else if (
+      entry["Name"][0] === "Smoke" ||
+      entry["Name"][0] === "smoke1"
+    ) {
+      smokeSum += parseInt(entry["Value"][0]);
+      return null; // Skip adding Smoke and smoke1 entries for now
+    }
+    return { Name: entry["Name"][0], Value: entry["Value"][0] };
+  })
+  .filter((entry) => entry !== null); // Remove skipped Smoke and smoke1 entries
 
-  if (smokeSum > 0) {
-    otherEntries.push({ Name: "Smoke1", Value: smokeSum.toString() });
-  }
+if (smokeSum > 0) {
+  otherEntries.push({ Name: "Smoke1", Value: smokeSum.toString() });
+} else if (smokeSum === 0) {
+  otherEntries.push({ Name: "Smoke1", Value: "Normal" });
+}
 
-  return otherEntries;
+return otherEntries;
 }
 
 module.exports = { monitor2 };

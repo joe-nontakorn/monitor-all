@@ -9,6 +9,9 @@ body {
 
 .building-data-container {
   display: flex;
+  gap: 10px; 
+
+ 
 }
 
 
@@ -31,7 +34,7 @@ body {
   border-bottom: 1px solid #ddd; 
   border-right: 1px solid #ddd; 
   text-align: center;
-  padding: 4.5px; 
+  padding: 4px; 
   width: 100%;
 }
 
@@ -40,6 +43,6 @@ body {
   border-bottom: 1px solid #ddd; 
   border-right: 1px solid #ddd; 
   text-align: center;
-  padding: 0.5px; 
+  padding: 0.05px; 
   width: 100%;
 }
