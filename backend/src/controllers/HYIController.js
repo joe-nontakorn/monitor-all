@@ -7,10 +7,6 @@ async function HYI(req, res) {
       { url: "http://172.17.26.20/general.xml", location: "HYI3_FL1" },
       { url: "http://172.17.26.21/general.xml", location: "HYI3_FL2" },
       { url: "http://172.17.26.55/general.xml", location: "HYI4" },
-
-
-      
-      
     ];
 
     const data = urls.map(async (urlObj) => {
@@ -32,7 +28,6 @@ async function HYI(req, res) {
           "smoke_eqp",
           "smoke_patching",
           "Ac_sensor",
-
         ]);
         const senSetEntries = extractEntries(result, "SenSet", [
           "Humidity_EQ1",
@@ -50,7 +45,6 @@ async function HYI(req, res) {
           "Temp_EQP",
           "Humidity_EQP",
           "Temp_Power",
-
         ]);
 
         return {
@@ -94,92 +88,98 @@ async function parseXml(xmlData) {
 
 // แปลง Smoke smoke1 ให้เป็นชื่อเดียวกัน
 function extractEntries(data, type, filters) {
-    const filteredEntries = data["set:Root"][type][0]["Entry"].filter((entry) =>
-      filters.includes(entry["Name"][0])
-    );
-  
-    let smoke_PowerSum = 0;
-    let smoke_EQSum = 0;
+  const filteredEntries = data["set:Root"][type][0]["Entry"].filter((entry) =>
+    filters.includes(entry["Name"][0])
+  );
 
-    let AC_Sum = 0;
-    let HumidEQ_Sum = 0;
-    let TempEQ_Sum = 0;
+  let smoke_PowerSum = 0;
+  let smoke_EQSum = 0;
 
+  let AC_Sum = 0;
+  let HumidEQ_Sum = 0;
+  let TempEQ_Sum = 0;
 
-    let Gen_Sum = 0;
+  let Gen_Sum = 0;
 
-
-    const otherEntries = filteredEntries.map((entry) => {
+  const otherEntries = filteredEntries
+    .map((entry) => {
       if (
+        entry["Name"][0] === "smoke_Inven" ||
+        entry["Name"][0] === "smoke_patching"
+      ) {
+        const value = entry["Value"][0] === "1" ? "Normal" : "Lost!";
+        return { Name: entry["Name"][0], Value: value };
+      }
+      
+      else if (entry["Name"][0] === "Gen" || entry["Name"][0] === "Gen1") {
+        const value = entry["Value"][0] === "1" ? "Running" : "STB";
+        return { Name: entry["Name"][0], Value: value };
+      } 
+
+      else if (
         entry["Name"][0] === "smoke_Power" ||
         entry["Name"][0] === "smoke_power" ||
         entry["Name"][0] === "smoke"
-
       ) {
-        smoke_PowerSum += parseInt(entry["Value"][0]);
+        const value = parseInt(entry["Value"][0]) > 0 ? "Normal" : "Lost!";
+        return { Name: "Smoke_Power", Value: value };
       } 
+
       else if (
         entry["Name"][0] === "smoke_EQ1" ||
         entry["Name"][0] === "smoke_eqp"
       ) {
-        smoke_EQSum += parseInt(entry["Value"][0]);
+        const value = parseInt(entry["Value"][0]) > 0 ? "Normal" : "Lost!";
+        return { Name: "Smoke_EQ1", Value: value };
       } 
+      
       else if (
         entry["Name"][0] === "AC" ||
         entry["Name"][0] === "Ac_sensor"
       ) {
-        AC_Sum += parseInt(entry["Value"][0]);
+        const value = parseInt(entry["Value"][0]) > 0 ? "Normal" : "Lost!";
+        return { Name: "AC", Value: value };
       } 
+      
+      
       else if (
         entry["Name"][0] === "Humidity_EQ1" ||
         entry["Name"][0] === "Humidity_EQP"
       ) {
         HumidEQ_Sum += parseInt(entry["Value"][0]);
-      } 
-      else if (
+      } else if (
         entry["Name"][0] === "Temp_EQ1" ||
         entry["Name"][0] === "Temp_EQP"
       ) {
         TempEQ_Sum += parseInt(entry["Value"][0]);
-      } 
-    //   else if (
-    //     entry["Name"][0] === "Gen" ||
-    //     entry["Name"][0] === "Gen1"
-    //   ) {
-    //     Gen_Sum += parseInt(entry["Value"][0]);
-    //   } 
-      else {
+      } else {
         return { Name: entry["Name"][0], Value: entry["Value"][0] };
       }
       return null;
-    }).filter((entry) => entry !== null);
-  
-    if (smoke_PowerSum > 0) {
-      otherEntries.push({ Name: "Smoke_Power", Value: smoke_PowerSum.toString() });
-    }
-  
-    if (smoke_EQSum > 0) {
-      otherEntries.push({ Name: "Smoke_EQ1", Value: smoke_EQSum.toString() });
-    }
+    })
+    .filter((entry) => entry !== null);
 
-    if (AC_Sum > 0) {
-        otherEntries.push({ Name: "AC", Value: AC_Sum.toString() });
-      }
+  // if (smoke_PowerSum > 0) {
+  //   otherEntries.push({ Name: "Smoke_Power", Value: smoke_EQSum.toString() });
+  // }
 
-    if (HumidEQ_Sum > 0) {
-        otherEntries.push({ Name: "Humidity_EQ", Value: HumidEQ_Sum.toString() });
-      }
+  // if (smoke_EQSum > 0) {
+  //   otherEntries.push({ Name: "Smoke_EQ1", Value: smoke_EQSum.toString() });
+  // }
 
-    if (TempEQ_Sum > 0) {
-        otherEntries.push({ Name: "Temp_EQ", Value: TempEQ_Sum.toString() });
-      }  
-    
-    // if (Gen_Sum > 0) {
-    //     otherEntries.push({ Name: "Gen", Value: Gen_Sum.toString() });
-    //   }  
-  
-    return otherEntries;
+  // if (AC_Sum > 0) {
+  //   otherEntries.push({ Name: "AC", Value: AC_Sum.toString() });
+  // }
+
+  if (HumidEQ_Sum > 0) {
+    otherEntries.push({ Name: "Humidity_EQ", Value: HumidEQ_Sum.toString() });
   }
-  
+
+  if (TempEQ_Sum > 0) {
+    otherEntries.push({ Name: "Temp_EQ", Value: TempEQ_Sum.toString() });
+  }
+
+  return otherEntries;
+}
 
 module.exports = { HYI };

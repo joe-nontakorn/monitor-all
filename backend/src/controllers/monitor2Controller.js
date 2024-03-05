@@ -172,9 +172,9 @@ function extractEntries(data, type, filters) {
       }
     } else if (entry["Name"][0] === "Gen1") {
       if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Lost!";
+        entry["Value"][0] = "Running!";
       } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Normal";
+        entry["Value"][0] = "STB";
       }
     } else if (entry["Name"][0] === "smoke1" || entry["Name"][0] === "Smoke" || entry["Name"][0] === "smoke2" ) {
       if (entry["Value"][0] === "1") {

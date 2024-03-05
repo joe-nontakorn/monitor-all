@@ -109,12 +109,12 @@ function App() {
             ${isMotion1 && isLost ? "red flashing" : ""}
             ${isMotion1 && !isNormal && !isDash ? "lightyellow" : ""}
 
-            ${isRectifier && isNormal ? "lightyellow" : ""}
+            ${isRectifier && isNormal ? "lightgray" : ""}
             ${isRectifier && isLost ? "red flashing" : ""}
-            ${isRectifier && !isNormal && !isDash ? "lightyellow" : ""}
+            ${isRectifier && !isNormal && !isDash ? "lightgray" : ""}
 
-            ${isHumidity && sensor.Value < 75 ? "lightgreen" : ""}
-            ${isHumidity && sensor.Value > 75 ? "red flashing" : ""}
+            ${isHumidity && sensor.Value < 80 ? "lightgreen" : ""}
+            ${isHumidity && sensor.Value > 80 ? "red flashing" : ""}
 
             ${isTemperature && sensor.Value < 40 ? "lightgreen" : ""}
             ${isTemperature && sensor.Value > 50 ? "red flashing" : ""}

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../assets/monitor2.css'
+import "../assets/monitor2.css";
 function App() {
   const [sensorData, setSensorData] = useState([]);
   const [HYIData, setHYIData] = useState([]); // เพิ่ม state สำหรับข้อมูลจาก HYI
@@ -68,14 +68,12 @@ function App() {
     "Temp_Power",
     "Humidity_EQ",
     "Temp_EQ",
+    "Humidity",
+    "Temperature",
     "Gen",
     "Gen1",
     "AC",
-    "Humidity",
-    "Temperature",
     "smoke_patching",
-   
-
   ];
 
   return (
@@ -97,9 +95,85 @@ function App() {
                 const sensor =
                   locationData.BinaryInSet.find((s) => s.Name === sensorName) ||
                   locationData.SenSet.find((s) => s.Name === sensorName);
+
+                const isDoor = sensorName === "Door";
+                const isAC = sensorName === "AC";
+                const isSmoke1 = sensorName === "Smoke1";
+                const isMotion1 = sensorName === "Motion1";
+                const isRectifier = sensorName === "Rectifier";
+
+                const isHumidity = sensorName === "Humidity";
+                const isTemperature = sensorName === "Temperature";
+
+                const isRecti11 = sensorName === "Recti11";
+                const isRecti12	 = sensorName === "Recti12";
+                const isRecti21 = sensorName === "Recti21";
+                const isRecti22 = sensorName === "Recti22";
+                const isGen1 = sensorName === "Gen1";
+
+
+                const isClose = sensor && sensor.Value === "Close";
+                const isNormal = sensor && sensor.Value === "Normal";
+                const isLost = sensor && sensor.Value === "Lost!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
+
+                const isRunning = sensor && sensor.Value === "Running";
+                const isSTB = sensor && sensor.Value === "STB";
+
+
+
+
+
+                const isDash = sensor && sensor.Value === "-";
                 return (
-                  <td key={locationIndex}>
-                    {sensor ? sensor.Value : "-"}{" "}
+                  <td
+                    key={locationIndex}
+                    className={`
+            ${isDoor && isClose ? "lightgray" : ""}
+            ${isDoor && !isClose ? "red flashing" : ""}
+
+            ${isAC && isNormal ? "lightpink" : ""}
+            ${isAC && isLost ? "red flashing" : ""}
+
+            ${isSmoke1 && isNormal ? "lightgray" : ""}
+            ${isSmoke1 && isLost ? "red flashing" : ""}
+
+            ${isMotion1 && isNormal ? "lightyellow" : ""}
+            ${isMotion1 && isLost ? "red flashing" : ""}
+            ${isMotion1 && !isNormal && !isDash ? "lightyellow" : ""}
+
+            ${isRectifier && isNormal ? "lightyellow" : ""}
+            ${isRectifier && isLost ? "red flashing" : ""}
+            ${isRectifier && !isNormal && !isDash ? "lightyellow" : ""}
+
+            ${isHumidity && sensor.Value < 80 ? "lightgreen" : ""}
+            ${isHumidity && sensor.Value > 80 ? "red flashing" : ""}
+
+            ${isTemperature && sensor.Value < 40 ? "lightgreen" : ""}
+            ${isTemperature && sensor.Value > 50 ? "red flashing" : ""}
+
+            ${isRecti11 && isNormal ? "lightyellow" : ""}
+            ${isRecti11 && isLost ? "red flashing" : ""}
+            ${isRecti11 && !isNormal && !isDash ? "lightyellow" : ""}
+
+            ${isRecti12 && isNormal ? "lightyellow" : ""}
+            ${isRecti12 && isLost ? "red flashing" : ""}
+            ${isRecti12 && !isNormal && !isDash ? "lightyellow" : ""}
+
+            ${isRecti21 && isNormal ? "lightyellow" : ""}
+            ${isRecti21 && isLost ? "red flashing" : ""}
+            ${isRecti21 && !isNormal && !isDash ? "lightyellow" : ""}
+
+            ${isRecti22 && isNormal ? "lightyellow" : ""}
+            ${isRecti22 && isLost ? "red flashing" : ""}
+            ${isRecti22 && !isNormal && !isDash ? "lightyellow" : ""}
+
+            ${isGen1 && isSTB ? "lightgreen" : ""}
+            ${isGen1 && isRunning ? "red flashing" : ""}
+            ${isGen1 && !isSTB && !isDash ? "lightgray" : ""}
+
+          `}
+                  >
+                    {sensor ? sensor.Value : "-"}
                   </td>
                 );
               })}
@@ -126,9 +200,7 @@ function App() {
                   locationData.BinaryInSet.find((s) => s.Name === sensorName) ||
                   locationData.SenSet.find((s) => s.Name === sensorName);
                 return (
-                  <td key={locationIndex}>
-                    {sensor ? sensor.Value : "-"}{" "}
-                  </td>
+                  <td key={locationIndex}>{sensor ? sensor.Value : "-"} </td>
                 );
               })}
             </tr>
