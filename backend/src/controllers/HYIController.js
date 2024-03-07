@@ -111,9 +111,18 @@ function extractEntries(data, type, filters) {
         return { Name: entry["Name"][0], Value: value };
       }
       
-      else if (entry["Name"][0] === "Gen" || entry["Name"][0] === "Gen1") {
-        const value = entry["Value"][0] === "1" ? "Running" : "STB";
-        return { Name: entry["Name"][0], Value: value };
+      // else if (entry["Name"][0] === "Gen" || entry["Name"][0] === "Gen1") {
+      //   const value = entry["Value"][0] === "1" ? "Lost!" : "STB";
+      //   return { Name: entry["Name"][0], Value: value };
+      // } 
+
+      else if (
+        entry["Name"][0] === "Gen" ||
+        entry["Name"][0] === "Gen1" 
+        
+      ) {
+        const value = parseInt(entry["Value"][0]) > 0 ? "Lost!" : "STB";
+        return { Name: "Gen1", Value: value };
       } 
 
       else if (
@@ -159,17 +168,7 @@ function extractEntries(data, type, filters) {
     })
     .filter((entry) => entry !== null);
 
-  // if (smoke_PowerSum > 0) {
-  //   otherEntries.push({ Name: "Smoke_Power", Value: smoke_EQSum.toString() });
-  // }
-
-  // if (smoke_EQSum > 0) {
-  //   otherEntries.push({ Name: "Smoke_EQ1", Value: smoke_EQSum.toString() });
-  // }
-
-  // if (AC_Sum > 0) {
-  //   otherEntries.push({ Name: "AC", Value: AC_Sum.toString() });
-  // }
+  
 
   if (HumidEQ_Sum > 0) {
     otherEntries.push({ Name: "Humidity_EQ", Value: HumidEQ_Sum.toString() });

@@ -4,7 +4,8 @@
 
 .monitor1 {
   font-family: 'Kanit', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .sensor-table1 {
@@ -18,8 +19,10 @@
 
 .thead-table1 th {
   width: 100px; 
+  font-size: 14px;
 
   background-color: #4db2ec;
+  font-size: 16px;
 }
 
 .thead-table1 th,
@@ -55,9 +58,11 @@ td.lightgreen {
 
 
 
-td.flashing {
-  animation: flashing 1s infinite;
+td.lightblue {
+  background-color: rgb(255, 255, 255);
 }
+
+
 
 
 
@@ -66,7 +71,10 @@ td.flashing {
 }
 
 @keyframes flashing {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+  100% {
+    background-color: red;
+  }
+  50% {
+    background-color: lightgray;
+  }
 }

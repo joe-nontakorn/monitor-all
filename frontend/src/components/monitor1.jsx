@@ -38,17 +38,26 @@ function App() {
     setAllSensorNames(names);
   }, [sensorData]);
 
+  useEffect(() => {
+    const refreshPage = () => {
+      window.location.reload();
+    };
+  
+    const timeoutId = setTimeout(refreshPage, 120000); // รีเฟรชหน้าทุก ๆ 30 วินาที
+  
+    return () => clearTimeout(timeoutId);
+  }, []);
+  
+
   const sensorOrder = [
     "Door",
     "AC",
     "Smoke1",
-    "smoke2",
     "Humidity",
     "Temperature",
     "Motion1",
     "Rectifier",
   ];
-
 
   return (
     <div className="monitor1">
@@ -57,43 +66,66 @@ function App() {
       </div>
       <table className="sensor-table1">
         <thead className="thead-table1">
-          <tr>
-            <th>Sensor</th>
-            {sensorData.map((locationData, index) => (
-              <th key={index}>{locationData.location}</th>
-            ))}
-          </tr>
+        <tr>
+  <th>Sensor</th>
+  {sensorData.map((locationData, index) => (
+    <th key={index}>
+      <a href={locationData.ip} target="_blank" rel="noopener noreferrer">
+        {locationData.location}
+      </a>
+    </th>
+  ))}
+</tr>
         </thead>
         <tbody className="tbody-table1">
-  {sensorOrder.map((sensorName, sensorIndex) => (
-    <tr key={sensorIndex}>
-    <td className="ssname">{sensorName}</td>
-    {sensorData.map((locationData, locationIndex) => {
-      const sensor =
-        locationData.BinaryInSet.find((s) => s.Name === sensorName) ||
-        locationData.SenSet.find((s) => s.Name === sensorName);
-      const isDoor = sensorName === "Door";
-      const isAC = sensorName === "AC";
-      const isSmoke1 = sensorName === "Smoke1";
-      const isSmoke2 = sensorName === "smoke2";
-      const isMotion1 = sensorName === "Motion1";
-      const isRectifier = sensorName === "Rectifier";
+          {sensorOrder.map((sensorName, sensorIndex) => (
+            <tr key={sensorIndex}>
+              <td className="ssname">{sensorName}</td>
+              {sensorData.map((locationData, locationIndex) => {
+                const sensor =
+                  locationData.BinaryInSet.find((s) => s.Name === sensorName) ||
+                  locationData.SenSet.find((s) => s.Name === sensorName);
+                const isDoor = sensorName === "Door";
+                const isAC = sensorName === "AC";
+                const isSmoke1 = sensorName === "Smoke1";
+                const isSmoke2 = sensorName === "smoke2";
+                const isMotion1 = sensorName === "Motion1";
+                const isRectifier = sensorName === "Rectifier";
 
-      const isHumidity = sensorName === "Humidity";
-      const isTemperature = sensorName === "Temperature";
-  
-      const isClose = sensor && sensor.Value === "Close";
-      const isNormal = sensor && sensor.Value === "Normal";
-      const isLost = sensor && sensor.Value === "Lost!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
+                const isHumidity = sensorName === "Humidity";
+                const isTemperature = sensorName === "Temperature";
 
-      const isDash = sensor && sensor.Value === "-";
-  
-      return (
-        <td
-          key={locationIndex}
-          className={`
+
+
+                const isOpen = sensor && sensor.Value === "Open";
+
+                const isClose = sensor && sensor.Value === "Close";
+                const isNormal = sensor && sensor.Value === "Normal";
+                const isLost = sensor && sensor.Value === "Lost!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
+
+                const isDash = sensor && sensor.Value === "-";
+
+
+                const isQHE = locationData.location === "QHE";
+                const isHBM = locationData.location === "HBM";
+
+
+
+                const sensorValue = (isDoor && isQHE) || (isDoor && isHBM) ? "-" : (sensor ? sensor.Value : "-");
+
+
+
+                return (
+                  <td
+                    key={locationIndex}
+                    className={`
             ${isDoor && isClose ? "lightgray" : ""}
-            ${isDoor && !isClose ? "red flashing" : ""}
+            ${isDoor && isQHE && isHBM? "lightgray" : ""}
+            ${isDoor && !isClose && isQHE && isHBM ? "red flashing" : ""}
+
+
+
+
 
             ${isAC && isNormal ? "lightpink" : ""}
             ${isAC && isLost ? "red flashing" : ""}
@@ -113,29 +145,26 @@ function App() {
             ${isRectifier && isLost ? "red flashing" : ""}
             ${isRectifier && !isNormal && !isDash ? "lightgray" : ""}
 
-            ${isHumidity && sensor.Value < 80 ? "lightgreen" : ""}
-            ${isHumidity && sensor.Value > 80 ? "red flashing" : ""}
+            ${isHumidity && sensor.Value >= 10 && sensor.Value <= 80.0 ? "lightgreen" : ""}
+            ${isHumidity && sensor.Value >= 80.1 && sensor.Value <= 90 ? "red flashing" : ""}
 
-            ${isTemperature && sensor.Value < 40 ? "lightgreen" : ""}
-            ${isTemperature && sensor.Value > 50 ? "red flashing" : ""}
+            ${isTemperature && sensor.Value >= 27 && sensor.Value <= 39 ? "lightgreen" : ""}
+            ${isTemperature && sensor.Value >= 10 && sensor.Value <= 26.9 ? "lightblue" : ""}
+            ${isTemperature && sensor.Value >= 39.1 && sensor.Value <= 99 ? "red flashing" : ""}
 
           `}
-        >
-          {sensor ? sensor.Value : "-"}
-        </td>
-      );
-      
-    })}
-  </tr>
-  
-  ))}
-</tbody>
+                  >
+                    {/* {sensor ? sensor.Value : "-"} */}
 
+                    {sensorValue}
 
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
       </table>
-
-
-      
     </div>
   );
 }

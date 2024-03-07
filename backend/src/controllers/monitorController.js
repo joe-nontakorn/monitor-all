@@ -33,8 +33,16 @@ async function monitor(req, res) {
       { url: "http://172.15.130.16/general.xml", location: "SMSK" },
       { url: "http://172.15.131.16/general.xml", location: "NKPN" },
       { url: "http://172.15.132.16/general.xml", location: "STH" },
-      { url: "http://172.15.133.16/general.xml", location: "6F" },
-      { url: "http://172.15.134.16/general.xml", location: "7F" },
+
+      { url: "http://172.15.138.16/general.xml", location: "BKE" },
+      { url: "http://172.15.139.16/general.xml", location: "BYI" },
+      { url: "http://172.15.140.16/general.xml", location: "STPD" },
+      { url: "http://172.15.141.16/general.xml", location: "PKN" },
+      { url: "http://172.15.142.16/general.xml", location: "KTB" },
+      { url: "http://172.15.143.16/general.xml", location: "BKD" },
+      { url: "http://172.15.144.16/general.xml", location: "ESIE" },
+      { url: "http://172.15.146.16/general.xml", location: "SMD" },
+      
 
 
       
@@ -62,6 +70,8 @@ async function monitor(req, res) {
           "Temperature",
           "Humidity",
         ]);
+
+        
 
         return {
           ip: url,
@@ -112,49 +122,49 @@ function extractEntries(data, type, filters) {
 
   let smokeSum = 0;
 
-  const otherEntries = filteredEntries
-  .map((entry) => {
+  const otherEntries = filteredEntries.map((entry) => {
+  //   if (entry["location"][0] === "BPO" && entry["Name"][0] === "Door") {
+  //     if (entry["Value"][0] === "1") {
+  //         entry["Value"][0] = "-";
+  //     } else if (entry["Value"][0] === "0") {
+  //         entry["Value"][0] = "-";
+  //     }
+  // }
     if (entry["Name"][0] === "Door") {
-      if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Close";
-      } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Open";
-      }
-    } else if (entry["Name"][0] === "AC") {
-      if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Normal";
-      } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Lost!";
-      }
-    } else if (entry["Name"][0] === "Motion1") {
-      if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Normal";
-      } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Lost!";
-      }
-    } else if (entry["Name"][0] === "Rectifier") {
-      if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Lost!";
-      } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Normal";
-      }
-    } else if (entry["Name"][0] === "smoke1" || entry["Name"][0] === "Smoke" || entry["Name"][0] === "smoke2" ) {
-      if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Normal";
-      } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Lost!";
-      }
-    } else if (
-      entry["Name"][0] === "Smoke" ||
-      entry["Name"][0] === "smoke1"
-    ) {
-      smokeSum += parseInt(entry["Value"][0]);
-      return null; // Skip adding Smoke and smoke1 entries for now
+        if (entry["Value"][0] === "1") {
+            entry["Value"][0] = "Close";
+        } else if (entry["Value"][0] === "0") {
+            entry["Value"][0] = "Open";
+        }
     }
-    return { Name: entry["Name"][0], Value: entry["Value"][0] };
-  })
-  .filter((entry) => entry !== null); // Remove skipped Smoke and smoke1 entries
-
+     else if (
+    entry["Name"][0] === "Door" ||
+    entry["Name"][0] === "AC" ||
+    entry["Name"][0] === "Motion1" ||
+    entry["Name"][0] === "smoke1" ||
+    entry["Name"][0] === "Smoke" ||
+    entry["Name"][0] === "smoke2"
+  ) {
+    if (entry["Value"][0] === "1") {
+      entry["Value"][0] = "Normal";
+    } else if (entry["Value"][0] === "0") {
+      entry["Value"][0] = "Lost!";
+    }
+  } else if (
+    
+    entry["Name"][0] === "Rectifier" 
+  ) {
+    if (entry["Value"][0] === "1") {
+      entry["Value"][0] = "Lost!";
+    } else if (entry["Value"][0] === "0") {
+      entry["Value"][0] = "Normal";
+    }
+  } else if (entry["Name"][0] === "Smoke" || entry["Name"][0] === "smoke1") {
+    smokeSum += parseInt(entry["Value"][0]);
+    return null;
+  }
+  return { Name: entry["Name"][0], Value: entry["Value"][0] };
+}).filter((entry) => entry !== null);
 if (smokeSum > 0) {
   otherEntries.push({ Name: "Smoke1", Value: smokeSum.toString() });
 } else if (smokeSum === 0) {

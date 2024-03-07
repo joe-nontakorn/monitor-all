@@ -5,19 +5,6 @@ async function monitor2(req, res) {
   try {
     const urls = [
      
-      { url: "http://172.15.124.16/general.xml", location: "MDH" },
-      { url: "http://172.15.125.16/general.xml", location: "NKI" },
-      { url: "http://172.15.127.16/general.xml", location: "PNG" },
-
-      { url: "http://172.15.138.16/general.xml", location: "BKE" },
-      { url: "http://172.15.139.16/general.xml", location: "BYI" },
-      { url: "http://172.15.140.16/general.xml", location: "STPD" },
-      { url: "http://172.15.141.16/general.xml", location: "PKN" },
-      { url: "http://172.15.142.16/general.xml", location: "KTB" },
-      { url: "http://172.15.143.16/general.xml", location: "BKD" },
-      { url: "http://172.15.144.16/general.xml", location: "ESIE" },
-      { url: "http://172.15.146.16/general.xml", location: "SMD" },
-
       { url: "http://172.15.150.16/general.xml", location: "TFD1" },
       { url: "http://172.15.151.16/general.xml", location: "TFD2" },
       { url: "http://172.15.152.16/general.xml", location: "PCSP" },
@@ -25,8 +12,6 @@ async function monitor2(req, res) {
       { url: "http://172.15.156.16/general.xml", location: "BBO" },
       { url: "http://172.15.157.16/general.xml", location: "BKI" },
 
-
-      { url: "http://172.15.159.16/general.xml", location: "AYT" },
       { url: "http://172.15.162.16/general.xml", location: "WNI" },
       { url: "http://172.15.163.16/general.xml", location: "KKS" },
       { url: "http://172.15.164.16/general.xml", location: "PTY1" },
@@ -103,15 +88,6 @@ async function parseXml(xmlData) {
     });
   });
 }
-
-// function extractEntries(data, type, filters) {
-//     return data['set:Root'][type][0]['Entry']
-//         .filter(entry => filters.includes(entry['Name'][0]))
-//         .map(entry => ({
-//             Name: entry['Name'][0],
-//             Value: entry['Value'][0] }));
-// }
-
 // แปลง Smoke smoke1 ให้เป็นชื่อเดียวกัน
 function extractEntries(data, type, filters) {
   const filteredEntries = data["set:Root"][type][0]["Entry"].filter((entry) =>
@@ -170,13 +146,21 @@ function extractEntries(data, type, filters) {
       } else if (entry["Value"][0] === "0") {
         entry["Value"][0] = "Lost!";
       }
-    } else if (entry["Name"][0] === "Gen1") {
-      if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Running!";
-      } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "STB";
-      }
-    } else if (entry["Name"][0] === "smoke1" || entry["Name"][0] === "Smoke" || entry["Name"][0] === "smoke2" ) {
+    } 
+    
+    else if (
+      entry["Name"][0] === "Gen1" ||
+      entry["Name"][0] === "Gen"
+    ) {
+      const value = parseInt(entry["Value"][0]) > 0 ? "Lost!" : "STB";
+      return { Name: "Gen1", Value: value };
+    } 
+    
+    
+    
+    
+    
+    else if (entry["Name"][0] === "smoke1" || entry["Name"][0] === "Smoke" || entry["Name"][0] === "smoke2" ) {
       if (entry["Value"][0] === "1") {
         entry["Value"][0] = "Normal";
       } else if (entry["Value"][0] === "0") {
@@ -203,3 +187,8 @@ return otherEntries;
 }
 
 module.exports = { monitor2 };
+
+
+
+
+
