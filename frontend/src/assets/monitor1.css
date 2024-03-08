@@ -20,7 +20,6 @@
 .thead-table1 th {
   width: 100px; 
   font-size: 14px;
-
   background-color: #4db2ec;
   font-size: 16px;
 }
@@ -75,6 +74,13 @@ td.lightblue {
     background-color: red;
   }
   50% {
-    background-color: lightgray;
+    background-color: rgb(255, 255, 255);
   }
 }
+
+.td-no-flashing {
+  animation: none !important; /* ไม่ให้มีการทำ animation */
+  background-color: rgb(255, 255, 255);
+
+}
+

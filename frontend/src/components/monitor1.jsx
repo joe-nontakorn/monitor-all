@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://172.16.12.13:3000/api/v1/monitor")
+      .get("http://localhost:4001/api/v1/monitor")
       .then((response) => {
         setSensorData(response.data.data);
       })
@@ -119,11 +119,10 @@ function App() {
                   <td
                     key={locationIndex}
                     className={`
+
+            ${isDoor && (isQHE || isHBM) ? "lightgray" : ""}
             ${isDoor && isClose ? "lightgray" : ""}
-            ${isDoor && isQHE && isHBM? "lightgray" : ""}
-            ${isDoor && !isClose && isQHE && isHBM ? "red flashing" : ""}
-
-
+            ${isDoor && isOpen && !isQHE && !isHBM? "red flashing" : ""}
 
 
 
