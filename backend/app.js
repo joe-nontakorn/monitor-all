@@ -74,9 +74,9 @@ const wss = new WebSocket.Server({ server });
 // Call WebSocket service function
 webSocketService(wss);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist'));
-});
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+
 
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
