@@ -59,7 +59,7 @@ app.use((req, res, next) => {
     }
 });
 
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+// app.use(express.static(path.join(__dirname, './public/dist')));
 
 app.use(cors());
 
@@ -74,7 +74,7 @@ const wss = new WebSocket.Server({ server });
 // Call WebSocket service function
 webSocketService(wss);
 
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 
 

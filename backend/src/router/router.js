@@ -17,5 +17,4 @@ exports.routes = ({ app }) => {
 
     app.use('/api/v1/temp30', temp30);
 
-
 };

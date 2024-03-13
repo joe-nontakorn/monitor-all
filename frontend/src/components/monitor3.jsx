@@ -11,10 +11,11 @@ function App() {
   const [sensorData, setSensorData] = useState([]);
   const [allSensorNames1, setAllSensorNames1] = useState([]);
   const [allSensorNames2, setAllSensorNames2] = useState([]);
+  
 
   useEffect(() => {
     axios
-      .get("http://172.16.12.13:4100//monitor-all/api/v1/BLDG1")
+      .get("http://localhost:3000/api/v1/BLDG1")
       .then((response) => {
         setSensorDataBLDG1(
           response.data.data.filter((location) => location.location === "BLDG1")
