@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/v1/BLDG1")
+      .get("http://172.16.12.13:3100/api/v1/BLDG1")
       .then((response) => {
         setSensorDataBLDG1(
           response.data.data.filter((location) => location.location === "BLDG1")

@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/v1/monitor")
+      .get("http://172.16.12.13:3100/api/v1/monitor")
       .then((response) => {
         setSensorData(response.data.data);
       })
