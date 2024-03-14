@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3200/api/v1/monitor2")
+      .get("http://localhost:3100/api/v1/monitor2")
       .then((response) => {
         setSensorData(response.data.data);
       })
@@ -21,7 +21,7 @@ function App() {
       });
 
     axios
-      .get("http://localhost:3200/api/v1/HYI")
+      .get("http://localhost:3100/api/v1/HYI")
       .then((response) => {
         setHYIData(response.data.data); // บันทึกข้อมูลจาก HYI
       })
@@ -30,7 +30,7 @@ function App() {
       });
 
     axios
-      .get("http://localhost:3200/api/v1/temp30")
+      .get("http://localhost:3100/api/v1/temp30")
       .then((response) => {
         settemp30Data(response.data.data); // บันทึกข้อมูลจาก temp30
       })
