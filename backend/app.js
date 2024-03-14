@@ -74,8 +74,13 @@ const wss = new WebSocket.Server({ server });
 // Call WebSocket service function
 webSocketService(wss);
 
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
+app.use(express.static(path.join(__dirname, '../frontend/dist'), {
+    setHeaders: (res, path) => {
+      if (path.endsWith('.css')) {
+        res.setHeader('Content-Type', 'text/css');
+      }
+    }
+  }));
 
 
 server.listen(port, () => {
