@@ -7,11 +7,14 @@ import Monitor2 from "./components/monitor2";
 
 import Monitor3 from "./components/monitor3";
 
+import "./assets/monitor1.css";
+
+
 function App() {
   const [webSocketData, setWebSocketData] = useState(null);
   // Connect to WebSocket server
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:4100");
+    const ws = new WebSocket("ws://localhost:3100");
 
     console.log("WebSocket :", ws);
 
@@ -61,7 +64,7 @@ function App() {
     };
 
     if (webSocketData) {
-      const ws = new WebSocket("ws://localhost:4100");
+      const ws = new WebSocket("ws://localhost:3100");
       ws.onmessage = handleMessage;
 
       return () => {
@@ -70,7 +73,7 @@ function App() {
     }
   }, [webSocketData]);
   return (
-    <div className="App">
+    <div className="container">
       <Monitor1 />
       <br />
       <Monitor2 />

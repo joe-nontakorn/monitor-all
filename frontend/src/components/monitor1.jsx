@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/*eslint no-undef: "error"*/
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -11,7 +12,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://172.16.12.13:3100/api/v1/monitor")
+      .get("http://localhost:3100/api/v1/monitor")
       .then((response) => {
         setSensorData(response.data.data);
       })
