@@ -59,7 +59,7 @@ app.use((req, res, next) => {
     }
 });
 
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 app.use(cors());
 
@@ -75,8 +75,9 @@ const wss = new WebSocket.Server({ server });
 webSocketService(wss);
 
 // Serve index.html for all other routes
+
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/build'));
 });
 
 
