@@ -76,8 +76,9 @@ webSocketService(wss);
 
 // Serve index.html for all other routes
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build'));
+app.get('/monitor-all/', (req, res) => {
+    // Handle WebSocket connection here
+    res.send('WebSocket connection established');
 });
 
 
