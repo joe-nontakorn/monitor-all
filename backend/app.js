@@ -71,14 +71,22 @@ const server = http.createServer(app);
 // Pass HTTP server to WebSocket server
 const wss = new WebSocket.Server({ server });
 
-// Call WebSocket service function
-webSocketService(wss);
+// Handle WebSocket connections
+wss.on('connection', (ws, req) => {
+    console.log('WebSocket connection established');
 
-// Serve index.html for all other routes
+    // Send a welcome message to the client
+    ws.send('WebSocket connection established');
 
-app.get('/monitor-all/', (req, res) => {
-    // Handle WebSocket connection here
-    res.send('WebSocket connection established');
+    // Handle incoming messages from the client
+    ws.on('message', (message) => {
+        console.log('Received message:', message);
+    });
+
+    // Handle WebSocket disconnections
+    ws.on('close', () => {
+        console.log('WebSocket connection closed');
+    });
 });
 
 
