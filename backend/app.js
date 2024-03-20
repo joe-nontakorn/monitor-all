@@ -89,6 +89,11 @@ wss.on('connection', (ws, req) => {
     });
 });
 
+app.all('*', (req, res, next) => {
+    res.sendFile("index.html", { root: __dirname + "../frontend/build" });
+    // next(new ErrorHandler(`${req.originalUrl} route not found`, 404));
+});
+
 
 
 server.listen(port, () => {
