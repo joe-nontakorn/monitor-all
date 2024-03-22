@@ -10,11 +10,14 @@ function App() {
   const [sensorData, setSensorData] = useState([]);
   const [allSensorNames, setAllSensorNames] = useState([]);
 
+  console.log("api:", process.env.REACT_APP_HOST);
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_HOST + "/api/v1/monitor")
       .then((response) => {
         setSensorData(response.data.data);
+
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

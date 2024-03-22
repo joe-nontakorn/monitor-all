@@ -14,7 +14,7 @@ function App() {
   const [webSocketData, setWebSocketData] = useState(null);
   // Connect to WebSocket server
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:" + process.env.REACT_APP_PORT);
+    const ws = new WebSocket("ws://monitor.jastel.local" );
 
     console.log("WebSocket :", ws);
 
@@ -64,7 +64,7 @@ function App() {
     };
 
     if (webSocketData) {
-      const ws = new WebSocket("ws://localhost:" + process.env.REACT_APP_PORT);
+      const ws = new WebSocket("ws://monitor.jastel.local");
       ws.onmessage = handleMessage;
 
       return () => {
