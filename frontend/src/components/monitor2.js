@@ -365,7 +365,7 @@ function App() {
       <table className="sensor-table4">
         <thead className="thead-table4">
           <tr>
-            <th>Sensor</th>
+            <th className="yyyy">Sensor</th>
             {HYIData.map((locationData, index) => (
               <th key={index}>
                 <a
