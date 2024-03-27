@@ -64,7 +64,7 @@ function App() {
     };
 
     if (webSocketData) {
-      const ws = new WebSocket("ws://monitor.jastel.local");
+      const ws = new WebSocket("ws://monitor.jastel.internal");
       ws.onmessage = handleMessage;
 
       return () => {
