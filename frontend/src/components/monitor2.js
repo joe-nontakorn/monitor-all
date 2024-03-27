@@ -103,6 +103,9 @@ function App() {
     "Humidity",
     "Temperature",
     "Gen1",
+    "Rectifier1",
+    "Rectifier2"
+
   ];
 
   return (
@@ -151,6 +154,9 @@ function App() {
                 const isNormal = sensor && sensor.Value === "Normal";
                 const isLost = sensor && sensor.Value === "Lost!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
 
+                const isRuning = sensor && sensor.Value === "Runing!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
+
+
                 const isDash = sensor && sensor.Value === "-";
                 return (
                   <td
@@ -168,7 +174,7 @@ function App() {
           
 
             ${isRectifier && isNormal ? "lightgray" : ""}
-            ${isRectifier && isLost ? "red flashing" : ""}
+            ${isRectifier && isRuning ? "red flashing" : ""}
             ${isRectifier && !isNormal && !isDash ? "lightgray" : ""}
 
             ${
@@ -200,19 +206,19 @@ function App() {
             
 
             ${isRecti11 && isNormal ? "lightgray" : ""}
-            ${isRecti11 && isLost ? "red flashing" : ""}
+            ${isRecti11 && isRuning ? "red flashing" : ""}
             ${isRecti11 && !isNormal && !isDash ? "lightgray" : ""}
 
             ${isRecti12 && isNormal ? "lightgray" : ""}
-            ${isRecti12 && isLost ? "red flashing" : ""}
+            ${isRecti12 && isRuning ? "red flashing" : ""}
             ${isRecti12 && !isNormal && !isDash ? "lightgray" : ""}
 
             ${isRecti21 && isNormal ? "lightgray" : ""}
-            ${isRecti21 && isLost ? "red flashing" : ""}
+            ${isRecti21 && isRuning ? "red flashing" : ""}
             ${isRecti21 && !isNormal && !isDash ? "lightgray" : ""}
 
             ${isRecti22 && isNormal ? "lightgray" : ""}
-            ${isRecti22 && isLost ? "red flashing" : ""}
+            ${isRecti22 && isRuning ? "red flashing" : ""}
             ${isRecti22 && !isNormal && !isDash ? "lightgray" : ""}
 
           `}
@@ -269,8 +275,16 @@ function App() {
 
                 const isSTB = sensor && sensor.Value === "STB";
 
+                const isRectifier1 = sensorName === "Rectifier1";
+
+                const isRectifier2 = sensorName === "Rectifier2";
+
+                const isRuning = sensor && sensor.Value === "Runing!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
+
                 const isNormal = sensor && sensor.Value === "Normal";
                 const isLost = sensor && sensor.Value === "Lost!";
+
+      
 
                 const isDash = sensor && sensor.Value === "-";
 
@@ -291,9 +305,7 @@ function App() {
                     ${isSmoke2 && isLost ? "red flashing" : ""}
                     ${isSmoke2 && !isNormal && !isDash ? "lightgray" : ""}
 
-                    ${
-                      isHumidity && sensor.Value >= 10 && sensor.Value <= 80.0
-                        ? "lightgreen"
+                    ${isHumidity && sensor.Value >= 10 && sensor.Value <= 80.0 ? "lightgreen"
                         : ""
                     }
                     ${
@@ -325,6 +337,16 @@ function App() {
                     ${isGen1 && isSTB ? "lightgreen" : ""}
                     ${isGen1 && isLost ? "red flashing" : ""}
                     ${isGen1 && (!sensor || !sensor.Value) ? "lightgray" : ""}
+
+                    ${isRectifier1 && isNormal ? "lightgray" : ""}
+                    ${isRectifier1 && isRuning ? "red flashing" : ""}
+                    ${isRectifier1 && !isNormal && !isDash ? "lightgray" : ""}
+
+                    ${isRectifier2 && isNormal ? "lightgray" : ""}
+                    ${isRectifier2 && isRuning ? "red flashing" : ""}
+                    ${isRectifier2 && !isNormal && !isDash ? "lightgray" : ""}
+
+                   
 
                   
                   `}

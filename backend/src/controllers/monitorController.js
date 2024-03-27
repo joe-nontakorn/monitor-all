@@ -155,7 +155,7 @@ function extractEntries(data, type, filters) {
     entry["Name"][0] === "Rectifier" 
   ) {
     if (entry["Value"][0] === "1") {
-      entry["Value"][0] = "Lost!";
+      entry["Value"][0] = "Runing!";
     } else if (entry["Value"][0] === "0") {
       entry["Value"][0] = "Normal";
     }

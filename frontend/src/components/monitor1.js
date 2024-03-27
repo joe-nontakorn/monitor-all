@@ -66,7 +66,7 @@ function App() {
   return (
     <div className="monitor1">
       <div>
-        <img src={JastelLogo} alt="Jastel Logo" />
+        <img className="JastelLogo" src={JastelLogo} alt="Jastel Logo" />
       </div>
       <table className="sensor-table1">
         <thead className="thead-table1">
@@ -107,6 +107,9 @@ function App() {
                 const isNormal = sensor && sensor.Value === "Normal";
                 const isLost = sensor && sensor.Value === "Lost!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
 
+                const isRuning = sensor && sensor.Value === "Runing!"; //เป็น Lost! ให้พื้นหลังเป็น สีแดง
+
+
                 const isDash = sensor && sensor.Value === "-";
 
 
@@ -141,7 +144,7 @@ function App() {
             ${isSmoke2 && !isNormal && !isDash ? "lightgray" : ""}
 
             ${isMotion1 && isNormal ? "lightyellow" : ""}
-            ${isMotion1 && isLost ? "red flashing" : ""}
+            ${isMotion1 && isRuning ? "red flashing" : ""}
             ${isMotion1 && !isNormal && !isDash ? "lightyellow" : ""}
 
             ${isRectifier && isNormal ? "lightgray" : ""}

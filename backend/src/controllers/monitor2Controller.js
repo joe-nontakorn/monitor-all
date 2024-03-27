@@ -118,7 +118,7 @@ function extractEntries(data, type, filters) {
       }
     } else if (entry["Name"][0] === "Rectifier") {
       if (entry["Value"][0] === "1") {
-        entry["Value"][0] = "Lost!";
+        entry["Value"][0] = "Runing!";
       } else if (entry["Value"][0] === "0") {
         entry["Value"][0] = "Normal";
       }
@@ -126,25 +126,25 @@ function extractEntries(data, type, filters) {
       if (entry["Value"][0] === "1") {
         entry["Value"][0] = "Normal";
       } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Lost!";
+        entry["Value"][0] = "Runing!";
       }
     } else if (entry["Name"][0] === "Recti12") {
       if (entry["Value"][0] === "1") {
         entry["Value"][0] = "Normal";
       } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Lost!";
+        entry["Value"][0] = "Runing!";
       }
     } else if (entry["Name"][0] === "Recti21") {
       if (entry["Value"][0] === "1") {
         entry["Value"][0] = "Normal";
       } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Lost!";
+        entry["Value"][0] = "Runing!";
       }
     } else if (entry["Name"][0] === "Recti22") {
       if (entry["Value"][0] === "1") {
         entry["Value"][0] = "Normal";
       } else if (entry["Value"][0] === "0") {
-        entry["Value"][0] = "Lost!";
+        entry["Value"][0] = "Runing!";
       }
     } 
     

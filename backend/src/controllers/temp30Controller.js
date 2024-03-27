@@ -112,12 +112,6 @@ function extractEntries(data, type, filters) {
           return { Name: entry["Name"][0], Value: value };
         }
         
-        // else if (entry["Name"][0] === "Gen" || entry["Name"][0] === "Gen1") {
-        //   const value = entry["Value"][0] === "1" ? "Lost!" : "STB";
-        //   return { Name: entry["Name"][0], Value: value };
-        // } 
-
-
         else if (
             entry["Name"][0] === "Gen" ||
             entry["Name"][0] === "Gen1" 
@@ -126,9 +120,6 @@ function extractEntries(data, type, filters) {
             const value = parseInt(entry["Value"][0]) > 0 ? "Lost!" : "STB";
             return { Name: "Gen1", Value: value };
           } 
-
-
-
 
         else if (entry["Name"][0] === "Door") {
             const value = entry["Value"][0] === "1" ? "Close" : "Open";
@@ -150,6 +141,24 @@ function extractEntries(data, type, filters) {
             const value = parseInt(entry["Value"][0]) > 0 ? "Normal" : "Lost!";
             return { Name: "Smoke2", Value: value };
           } 
+
+          else if (
+            entry["Name"][0] === "Rectifier1" 
+            
+          ) {
+            const value = parseInt(entry["Value"][0]) > 0 ? "Runing!" : "Normal";
+            return { Name: "Rectifier1", Value: value };
+          } 
+
+          else if (
+            entry["Name"][0] === "Rectifier2" 
+            
+          ) {
+            const value = parseInt(entry["Value"][0]) > 0 ? "Runing!" : "Normal";
+            return { Name: "Rectifier2", Value: value };
+          } 
+
+
   
          else {
           return { Name: entry["Name"][0], Value: entry["Value"][0] };
